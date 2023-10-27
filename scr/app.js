@@ -21,11 +21,14 @@ db.once('open', () => {
 
 app.use(express.json());
 
-const apiRouter = require('./routes/citas'); 
-app.use('/citas', apiRouter);
+const apiRouter = require('./routes/usuario'); 
+app.use('/usuario', apiRouter);
 
-const apiRouterClientes = require('./routes/clientes'); 
-app.use('/clientes', apiRouterClientes);
+const apiRouterClientes = require('./routes/publicacion'); 
+app.use('/publicacion', apiRouterClientes);
+
+const apiRouterComentarios = require('./routes/comentario');
+app.use('/comentario', apiRouterComentarios);
 
 const apiRouterUsuarios = require('./routesSQL/login'); 
 app.use('/usuarios', apiRouterUsuarios);

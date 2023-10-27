@@ -46,13 +46,27 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.get('/:publicacion_id', async (req, res) => {
+  const itemId = req.params.publicacion_id;
+
+  try{
+    const item = await Comentarios.find({IDPublicacion: itemId});
+    if(item){
+      res.json(item);
+    } else{
+      res.status(404).json({error: "lista no encontrada"});
+    }
+  } catch (err){
+    res.status(500).json({ error: err.message});
+  }
+})
 
 router.put('/:id', async (req, res) => {
   const itemId = req.params.id;
   const updatedItemData = req.body;
 
   try {
-    const result = await Comentarios.findOneAndUpdate({ IDCliente: itemId }, updatedItemData, { new: true });
+    const result = await Comentarios.findOneAndUpdate({ id: itemId }, updatedItemData, { new: true });
 
     if (result) {
       res.json(result);
