@@ -2,6 +2,21 @@ const express = require('express');
 const router = express.Router();
 const Cita = require('../models/UsuarioModel');
 
+router.get('/email/:email', async (req, res) => {
+  const userEmail = req.params.email;
+
+  try {
+    const usuario = await Usuario.findOne({ email: userEmail });
+
+    if (usuario) {
+      res.json(usuario);
+    } else {
+      res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 router.post('/', async (req, res) => {
   const newItemData = req.body;
