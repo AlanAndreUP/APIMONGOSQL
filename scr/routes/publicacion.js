@@ -2,6 +2,22 @@ const express = require('express');
 const router = express.Router();
 const publicaciones = require('../models/PublicacionModel.js');
 
+router.get('/usuario/:id', async (req, res) => {
+  const usuarioId = req.params.id;
+
+  try {
+    const publicaciones = await Publicacion.find({ IDCliente: usuarioId });
+
+    if (publicaciones.length > 0) {
+      res.json(publicaciones);
+    } else {
+      res.status(404).json({ error: 'No se encontraron publicaciones para este usuario' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.post('/', async (req, res) => {
   const newItemData = req.body;
 
