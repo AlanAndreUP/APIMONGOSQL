@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Cita = require('../models/UsuarioModel');
 
-router.delete('/email/:email', async (req, res) => {
+router.delete('/:email', async (req, res) => {
   const userEmail = req.params.email;
 
   try {
@@ -18,7 +18,7 @@ router.delete('/email/:email', async (req, res) => {
   }
 });
 
-router.get('/email/:email', async (req, res) => {
+router.get('/:email', async (req, res) => {
   const userEmail = req.params.email;
 
   try {
