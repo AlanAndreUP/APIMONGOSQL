@@ -2,6 +2,22 @@ const express = require('express');
 const router = express.Router();
 const publicaciones = require('../models/PublicacionModel.js');
 
+router.delete('/fecha/:fecha', async (req, res) => {
+  const fechaPublicacion = req.params.fecha;
+
+  try {
+    const result = await publicaciones.deleteMany({ fecha: fechaPublicacion });
+
+    if (result.deletedCount > 0) {
+      res.json({ message: 'Publicaciones eliminadas por fecha' });
+    } else {
+      res.status(404).json({ error: 'No se encontraron publicaciones para la fecha dada' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.get('/usuario/:id', async (req, res) => {
   const usuarioId = req.params.id;
 
