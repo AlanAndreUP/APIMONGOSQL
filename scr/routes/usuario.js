@@ -6,7 +6,7 @@ router.delete('/email/:email', async (req, res) => {
   const userEmail = req.params.email;
 
   try {
-    const result = await Cita.findOneAndRemove({ email: userEmail });
+    const result = await Usuario.findOneAndRemove({ email: userEmail });
 
     if (result) {
       res.json({ message: 'El usuario fue eliminado' });
