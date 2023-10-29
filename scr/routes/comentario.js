@@ -5,6 +5,39 @@ const Comentarios = require('../models/ComentarioModel');
 router.post('/', async (req, res) => {
   const newItemData = req.body;
 
+  router.delete('/fecha/:fecha', async (req, res) => {
+    const fechaComentario = req.params.fecha;
+  
+    try {
+      // Utiliza el método adecuado para borrar comentarios por fecha
+      const result = await Comentarios.deleteMany({ fecha: fechaComentario });
+  
+      if (result.deletedCount > 0) {
+        res.json({ message: 'Comentarios eliminados por fecha' });
+      } else {
+        res.status(404).json({ error: 'No se encontraron comentarios para la fecha dada' });
+      }
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  router.delete('/publicacion/:publicacion_id', async (req, res) => {
+    const publicacionId = req.params.publicacion_id;
+  
+    try {
+      const result = await Comentarios.deleteMany({ IDPublicacion: publicacionId });
+  
+      if (result.deletedCount > 0) {
+        res.json({ message: 'Comentarios eliminados por ID de publicación' });
+      } else {
+        res.status(404).json({ error: 'No se encontraron comentarios para la publicación dada' });
+      }
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   try {
     const newItem = new Comentarios(newItemData);
     const result = await newItem.save();
