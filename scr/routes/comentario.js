@@ -5,7 +5,7 @@ const Comentarios = require('../models/ComentarioModel');
 router.post('/', async (req, res) => {
   const newItemData = req.body;
 
-  router.delete('/fecha/:fecha', async (req, res) => {
+  router.delete('/:fecha', async (req, res) => {
     const fechaComentario = req.params.fecha;
   
     try {
@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     }
   });
 
-  router.delete('/publicacion/:publicacion_id', async (req, res) => {
+  router.delete('/:publicacion_id', async (req, res) => {
     const publicacionId = req.params.publicacion_id;
   
     try {
