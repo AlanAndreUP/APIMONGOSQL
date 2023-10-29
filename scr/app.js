@@ -36,3 +36,4 @@ app.use('/usuarios', apiRouterUsuarios);
 app.listen(port, () => {
   console.log(`Servidor en ejecución en el puerto ${port}`);
 });
+ 
