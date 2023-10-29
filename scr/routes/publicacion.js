@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const publicaciones = require('../models/PublicacionModel.js');
 
-router.delete('/fecha/:fecha', async (req, res) => {
+router.delete(':fecha', async (req, res) => {
   const fechaPublicacion = req.params.fecha;
 
   try {
@@ -18,7 +18,7 @@ router.delete('/fecha/:fecha', async (req, res) => {
   }
 });
 
-router.get('/usuario/:id', async (req, res) => {
+router.get(':id', async (req, res) => {
   const usuarioId = req.params.id;
 
   try {
