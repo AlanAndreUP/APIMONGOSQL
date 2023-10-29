@@ -2,6 +2,22 @@ const express = require('express');
 const router = express.Router();
 const Cita = require('../models/UsuarioModel');
 
+router.delete('/email/:email', async (req, res) => {
+  const userEmail = req.params.email;
+
+  try {
+    const result = await Cita.findOneAndRemove({ email: userEmail });
+
+    if (result) {
+      res.json({ message: 'El usuario fue eliminado' });
+    } else {
+      res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.get('/email/:email', async (req, res) => {
   const userEmail = req.params.email;
 
